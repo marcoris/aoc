@@ -11,6 +11,9 @@ fi
 # project vartiable is "dayXX" where XX is the day variable
 project=$(printf "day%02d" $1)
 
+# concatenate year and project
+new_dir="${YEAR}/${project}"
+
 # get session cookie from file if .session exists
 if [[ -f ".session" ]]; then
   AOC_SESSION=$(<".session")
@@ -27,9 +30,9 @@ if [[ $VALIDSESSION =~ "Puzzle inputs differ by user." ]] || [[ $VALIDSESSION =~
     return
 fi
 
-mkdir ${project}
+mkdir $new_dir
 
-cd ${project}
+cd $new_dir
 
 curl -s "https://adventofcode.com/${YEAR}/day/${day}/input" --cookie "session=${AOC_SESSION}" -o input.txt
 
